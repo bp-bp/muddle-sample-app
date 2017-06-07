@@ -1,0 +1,40 @@
+<div class = "left column">
+	<div class = "head-bar">
+		<fieldset class = "no-border">
+			<button ng-click = "s_menu.new_blank_master()">New Company</button>
+			<button title = "Download a zip file containing the current company's raw data" ng-click = "s_menu.backend.export_master(s_menu.current.master())">Export Company</button>
+		</fieldset>
+	</div>
+	
+	<fieldset ng-show = "master.is_new" mud-master = "master" ng-repeat = "master in s_menu.dm.masters | filter:{id: s_menu.current.master().id}">
+		<mud-prop mud-prop-type = "val" mud-name = "name">
+			Company Name: <input mud-bind/>
+			<button ng-click = "s_menu.backend.save(s_menu.current.master())">Save Company</button>
+		</mud-prop>
+	</fieldset>
+	
+	<fieldset>
+		<legend>Choose a company</legend>
+		<select ng-model = "s_menu.current.master"
+				ng-model-options = "{getterSetter: true}"
+				ng-options = "master.get_child('name').val() for master in s_menu.dm.masters"
+				ng-change = "s_menu.change_master(s_menu.current.master(), {{s_menu.current.master()}})"></select>
+	</fieldset>
+	
+	<fieldset>
+		<legend>Choose an entity type to edit:</legend>
+		<nav class = "spacer">
+			<button ng-repeat = "type in s_menu.dm.get_types()" ng-click = "s_menu.current.type(type)">{{type | capitalize}}</button>
+		</nav>
+		
+		<!-- picker, here the user selects which individual entity instance they are currently editing -->
+		<div ng-show = "s_menu.dm.ents_by_type[s_menu.current.type()].length > 0">
+			<legend>Choose {{s_menu.current.type()}}:</legend>
+			<ul class = "ent-picker">
+				<li ng-class = "{'selected': s_menu.current.entity().id == ent.id}" ng-repeat = "ent in s_menu.dm.ents_by_type[s_menu.current.type()] | orderBy:'edit_sort'" ng-click = "s_menu.current.entity(ent)">
+					{{ent.get_child('name').val()}}
+				</li>
+			</ul>
+		</div>
+	</fieldset>
+</div>

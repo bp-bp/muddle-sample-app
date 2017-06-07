@@ -1,0 +1,121 @@
+<div class = "right column">
+	<!-- delete button, implement later -->
+	<!--<button ng-if = "s_edit.current.entity().type === s_edit.current.type()" -->
+	
+	<!-- here we define the entity types for this app -->
+	<!-- also contains input fields for editing -->
+	<!-- we switch which one is displayed with ng-show, do not use ng-if. all entity types must render -->
+	<!-- whether visible or not in order for service to build data model -->
+	
+	<header class = "edit-header head-bar">
+		<h5>{{s_edit.current.type()}}</h5>
+		<button 	ng-if = "s_edit.current.type()" 
+					ng-click = "s_edit.current.entity(s_edit.dm.new_blank_entity(s_edit.current.type()))">New {{s_edit.current.type()}}</button>
+		<button 	ng-if = "s_edit.current.entity().type === s_edit.current.type()" 
+					ng-click = "s_edit.delete_entity(s_edit.current.entity())">Delete {{s_edit.current.type()}}</button>
+		<button 	ng-if = "s_edit.current.type() && s_edit.dm.modified_ents().length" 
+					ng-click = "s_edit.backend.save(s_edit.dm.modified_ents(), s_edit.current.master())">Save</button>
+	</header>
+	
+	<!-- Person -->
+	<div ng-show = "s_edit.current.type() === 'person'">
+		<form mud-ent = "ent" mud-ent-type = "person" ng-repeat = "ent in s_edit.dm.ents_by_type['person'] | filter: {id: s_edit.current.entity().id}">
+			<fieldset class = "notable">
+				<!-- a couple of simple value-type properties -->
+				<mud-prop class = "field" mud-name = "name" mud-prop-type = "val">
+					<span>Name:</span> <input mud-bind/>
+				</mud-prop>
+
+				<mud-prop class = "field" mud-name = "age" mud-prop-type = "val">
+					<span>Age:</span> <input type = "number" mud-bind>
+				</mud-prop>
+
+				<!-- a reference type property, just a reference to another entity type -->
+				<mud-prop class = "field" mud-name = "dept" mud-prop-type = "ref">
+					<span>Dept:</span> <select 	mud-bind
+									ng-options = "dept.id as dept.get_child('name').val() for dept in s_edit.dm.ents_by_type['department'] track by dept.id"></select>
+				</mud-prop>
+			</fieldset>
+			
+			<!-- a list-prop with variable length -->
+			<fieldset mud-list-prop mud-name = "quirk_list">
+				<legend>Quirks</legend>
+				<button ng-click = "mud.list_prop.increment()">Add a quirk</button>
+				<!-- commented line below is the "longhand" version of this part, with the ng-repeat and the list obj spelled out -->
+								<!-- mud-list-prop-repeat just adds the necessary ng-repeat -->
+								<!--<div ng-repeat = "obj in mud.list_prop.enum_list() | orderBy: 'edit_sort'">-->
+				<section mud-list-prop-repeat>
+					<mud-prop-cont mud-name = "a_quirk">
+						<mud-prop mud-name = "quirk_chosen" mud-prop-type = "ref">
+							<select mud-bind
+									ng-options = "quirk.id as quirk.get_child('name').val() for quirk in s_edit.dm.ents_by_type['quirk'] track by quirk.id"></select>
+						</mud-prop>
+						<button ng-click = "mud.prop_cont.remove_self()">X</button>
+						<button ng-click = "s_edit.dm.ent_up(mud.prop_cont, mud.parent_obj.children())">up</button>
+						<button ng-click = "s_edit.dm.ent_down(mud.prop_cont, mud.parent_obj.children())">down</button>
+					</mud-prop-cont>
+				</section>
+			</fieldset>
+			
+			<!-- a bound list-prop. is bound to a particular entity type. length will always be the number of entities of the bound type,-->
+			<!-- and each prop-cont will be bound to its corresponding entity in edit_sort sequence -->
+			
+			<!-- this container is here for no reason, let's get rid of it -->
+			<!--<mud-prop-cont mud-name = "random_container">-->
+			<fieldset mud-list-prop mud-name = "feature_bound_list" mud-bound-list = "s_edit.dm.ents_by_type['feature']" mud-bound-list-type = "feature">
+				<legend>Features</legend>
+
+				<section class = "field" mud-prop-cont mud-name = "feature_container" mud-list-prop-repeat>
+					<!-- the 'bound prop' in a bound list-prop doesn't need/shouldn't have an input field -->
+					<!-- it contains the reference to the corresponding entity in the bound list -->
+					<p mud-prop mud-name = "bound_feature" mud-prop-type = "ref" mud-bound-prop>
+						{{mud.prop.val().get_child('name').val()}}
+					</p>
+					<!-- this is just a regular prop, not the bound prop, and so contains an input -->
+					<p mud-prop mud-name = "bound_feature_value" mud-prop-type = "val">
+						<input mud-bind type = "number"/>
+					</p>
+				</section>
+			</fieldset>
+			<!--</mud-prop-cont>-->
+			<!-- filepicker -->
+			<mud-prop-cont mud-name = "a_file">
+				<label class = "button"><input style = "visibility: hidden; overflow: hidden; position: absolute;" type = "file" asset-filepicker/>{{mud.filename_prop.val() ? "File: " + mud.filename_prop.val() : "Click to attach photo..."}}</label>
+			</mud-prop-cont>
+		</form>
+	</div>
+	<!-- end Person definition -->
+	
+	<!-- Feature -->
+	<div ng-show = "s_edit.current.type() === 'feature'">
+		<form mud-ent = "ent" mud-ent-type = "feature" ng-repeat = "ent in s_edit.dm.ents_by_type['feature'] | filter:{id: s_edit.current.entity().id}">
+			<mud-prop mud-name = "name" mud-prop-type = "val">
+				Name: <input mud-bind/>
+			</mud-prop>
+		</form>
+	</div>
+	<!-- end Feature definition -->
+	
+	<!-- Quirk -->
+	<div ng-show = "s_edit.current.type() === 'quirk'">
+		<form mud-ent = "ent" mud-ent-type = "quirk" ng-repeat = "ent in s_edit.dm.ents_by_type['quirk'] | filter:{id: s_edit.current.entity().id}">
+			<mud-prop mud-name = "name" mud-prop-type = "val">
+				Name: <input mud-bind/>
+			</mud-prop>
+		</form>
+	</div>
+	<!-- end Quirk definition -->
+	
+	<!-- Department -->
+	<div ng-show = "s_edit.current.type() === 'department'">
+		<form mud-ent = "ent" mud-ent-type = "department" ng-repeat = "ent in s_edit.dm.ents_by_type['department'] | filter:{id: s_edit.current.entity().id}">
+			<mud-prop mud-name = "name" mud-prop-type = "val">
+				Name: <input mud-bind/>
+			</mud-prop>
+		</form>
+	</div>
+	<!-- end Department definition -->
+	
+	
+	
+</div>
