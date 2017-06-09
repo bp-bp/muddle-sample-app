@@ -1662,7 +1662,6 @@ angular.module("muddle").service("muddle_backend", ["data_muddle", "$http", "$wi
 		if (angular.isDefined(master)) {
 			params.master_id = master.id;
 		}
-		console.log("here");
 		// surely there's a better way to do this
 		var a = angular.element("<a/>");
 		a.attr({ 	href: "/export_master/?master_id=" + params.master_id
