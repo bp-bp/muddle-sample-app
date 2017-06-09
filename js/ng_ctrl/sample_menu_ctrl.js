@@ -4,13 +4,6 @@ function sample_menu_ctrl(data_muddle, muddle_backend, current) {
 	self.backend = muddle_backend;
 	self.current = current;
 	
-	// testing/troubleshooting
-	self.log_current = function() {
-		console.log("current entity: ", self.current.entity());
-		console.log("current type: ", self.current.type());
-		console.log("current master: ", self.current.master());
-	};
-	
 	// switch from one master-level dataset to another
 	self.change_master = function(master, old_master) {
 		var go = true, param_master = master || null;
