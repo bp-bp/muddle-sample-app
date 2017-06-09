@@ -22,14 +22,14 @@
 	</fieldset>
 	
 	<fieldset>
-		<legend>Choose an entity type to edit:</legend>
+		<legend>Choose an entity type to edit</legend>
 		<nav class = "spacer">
 			<button ng-repeat = "type in s_menu.dm.get_types()" ng-click = "s_menu.current.type(type)">{{type | capitalize}}</button>
 		</nav>
 		
 		<!-- picker, here the user selects which individual entity instance they are currently editing -->
 		<div ng-show = "s_menu.dm.ents_by_type[s_menu.current.type()].length > 0">
-			<legend>Choose {{s_menu.current.type()}}:</legend>
+			<legend>Choose {{s_menu.current.type()}}</legend>
 			<ul class = "ent-picker">
 				<li ng-class = "{'selected': s_menu.current.entity().id == ent.id}" ng-repeat = "ent in s_menu.dm.ents_by_type[s_menu.current.type()] | orderBy:'edit_sort'" ng-click = "s_menu.current.entity(ent)">
 					{{ent.get_child('name').val()}}

@@ -15,6 +15,8 @@
 					ng-click = "s_edit.delete_entity(s_edit.current.entity())">Delete {{s_edit.current.type()}}</button>
 		<button 	ng-if = "s_edit.current.type() && s_edit.dm.modified_ents().length" 
 					ng-click = "s_edit.backend.save(s_edit.dm.modified_ents(), s_edit.current.master())">Save</button>
+		
+	
 	</header>
 	
 	<!-- Person -->
