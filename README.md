@@ -1,4 +1,4 @@
-#Sample App
+# Sample App
 
 To try this out, run the muddle_backend.py script and point your browser at http://localhost:8081/static/html/sample_app.html
 
