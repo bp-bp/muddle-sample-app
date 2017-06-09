@@ -115,7 +115,6 @@ fieldset legend {
 	padding: 0.25rem;
 	margin: -0.5rem -0.5rem 0.5rem -0.5rem;
 	border-top: 3px solid #444343;
-	
 }
 
 @media(min-width: 550px) {
@@ -157,6 +156,7 @@ fieldset legend {
 }
 .edit-header button {
 	float: right;
+	margin-top: .2rem;
 }
 .edit-header h5, .edit-header button, .edit-header .button {
 	display: inline-block;
