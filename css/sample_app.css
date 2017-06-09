@@ -1,10 +1,14 @@
 /********** global **********/
 html {
 	font-family: Arial, Helvetica, sans-serif;
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	box-sizing: inherit;
 }
 body { 
 	line-height: 1.25; 
-	background-color: #aeaeae;
+	background-color: #444343;
 }
 
 /********** some standard styles **********/
@@ -22,24 +26,31 @@ h6 {font-size: 1rem;}
 
 button,.button {
 	color: #ecf0f1;
-	background-color: #05575B;
-	border: 1px solid #05575B;
-	border-radius: 4px;
+	background-color: #444343;
+	border: 1px solid #444343;
+	border-radius: 2px;
 	text-transform: uppercase;
 	font-weight: bold;
 	box-sizing: border-box;
 	cursor: pointer;
 	padding: 0.1rem 0.25rem;
 	margin-right: 0.25rem;
+	margin-bottom: 0;
+	margin-top: 0;
 }
 button:hover,.button:hover {
 	border: 1px solid #48a3a6;
 }
 
+input,select {
+	color: #444343;
+}
+
 fieldset {
 	margin-bottom: 1rem;
 	padding: 0.25rem;
-	border-color: #b2b2b2;
+	border: none;
+	/*border-color: #b2b2b2;*/
 	display: table;
 }
 fieldset > .field {
@@ -61,6 +72,7 @@ fieldset > .field {
 fieldset.no-border {
 	border: none;
 	padding-left: 0;
+	margin: 0;
 }
 fieldset legend {
 	font-weight: bold;
@@ -81,25 +93,29 @@ fieldset legend {
 .page-header {
 	padding: 1.25rem;
 	margin-bottom: 1rem;
-	background-color: #2c3e50;
-	color: #ecf0f1;
-	border-bottom: 5px solid #48a3a6;
+	background-color: #181717;
+	color: #e6e6e6;
+	border-bottom: 3px solid #277552;
+	position: relative;
 }
 .left {
 	margin-bottom: 1rem;
 	padding: 0.5rem;
-	background-color: #e6e6e6;
+	background-color: #277552;
+	color: #e6e6e6;
 }
 .right {
 	padding: 0.5rem;
-	background-color: #e6e6e6;
+	background-color: #277552;
+	color: #e6e6e6;
 }
 .head-bar {
-	color: #ecf0f1;
-	background-color: #2c3e50;
+	color: #e6e6e6;
+	background-color: #181717;
 	padding: 0.25rem;
 	margin: -0.5rem -0.5rem 0.5rem -0.5rem;
-	border-top: 3px solid #48a3a6;
+	border-top: 3px solid #444343;
+	
 }
 
 @media(min-width: 550px) {
@@ -136,6 +152,9 @@ fieldset legend {
 }
 
 /********** ui classes **********/
+.edit-header {
+	overflow: auto;
+}
 .edit-header button {
 	float: right;
 }
@@ -144,29 +163,49 @@ fieldset legend {
 }
 .ent-picker {
 	margin: 0;
-	padding: 0 0 0 1rem;
+	padding: .5rem 0 0 1rem;
 }
 .ent-picker li {
 	list-style-type: none;
 	min-height: 1.25rem;
 	cursor: pointer;
 	margin: 0;
+	background-color: #444343;
+	padding: .2rem;
 }
 .ent-picker li:hover {
-	color: #55728e;
+	color: #646161;
 }
 .selected {
 	font-weight: bold;
-	border: 1px solid #4A708B;
+	border: 2px solid #75B095;
+	border-radius: 2px;
 }
 .filepicker-label {
 	cursor: pointer;
 }
-
+.head-button {
+	position: absolute;
+	bottom: -1.75rem;
+	right: .25rem;
+	border-color: #181717;
+}
+@media(min-width: 550px) {
+	.head-button {
+		bottom: .25rem;
+		border-color: #444343;
+	}
+}
 /********** util classes **********/
 .center {
 	text-align: center;
 }
 .spacer {
 	margin-bottom: 1.25rem;
+}
+.float-right {
+	float: right;
+}
+.clear {
+	clear: both;
 }
