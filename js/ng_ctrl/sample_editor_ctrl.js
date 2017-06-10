@@ -20,7 +20,6 @@ function sample_editor_ctrl(data_muddle, muddle_backend, current) {
 					self.current.type(Object.keys(self.dm.ents_by_type)[0]);
 					self.current.entity(self.dm.ents_by_type[self.current.type()][0]);
 				}
-				console.log(self.dm);
 			}
 		);
 	};
