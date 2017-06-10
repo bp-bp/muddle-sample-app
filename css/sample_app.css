@@ -131,9 +131,9 @@ fieldset legend {
 		float: left;
 	}
 	.right {
-		width: 65%;
+		width: 68%;
 		float: left;
-		margin-left: 5%;
+		margin-left: 2%;
 	}
 }
 .wrapper:after {
