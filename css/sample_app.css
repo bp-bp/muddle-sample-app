@@ -50,7 +50,6 @@ fieldset {
 	margin-bottom: 1rem;
 	padding: 0.25rem;
 	border: none;
-	/*border-color: #b2b2b2;*/
 	display: table;
 }
 fieldset > .field {
@@ -58,6 +57,7 @@ fieldset > .field {
 }
 .field > * {
 	display: table-cell;
+	padding: 0 .25rem;
 }
 
 @media(min-width: 550px) {
