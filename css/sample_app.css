@@ -163,7 +163,7 @@ fieldset legend {
 }
 .ent-picker {
 	margin: 0;
-	padding: .5rem 0 0 1rem;
+	padding: .5rem 0 0 0;
 }
 .ent-picker li {
 	list-style-type: none;
