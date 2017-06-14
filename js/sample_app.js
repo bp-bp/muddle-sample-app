@@ -2,9 +2,16 @@ angular.module("mud_app", ["muddle"]);
 
 angular.module("mud_app").service("current", [function() {
 	var _current_entity = null;
-	var _current_ents_by_type = {}; // not using?
+	var _current_ents_by_type = {}; // not using yet
 	var _current_type = null;
 	var _current_master = null;
+	
+	this.init = function() {
+		_current_entity = null;
+		_current_ents_by_type = null;
+		_current_type = null;
+		_current_master = null;
+	};
 	
 	// getters/setters
 	this.entity = function(ent) {

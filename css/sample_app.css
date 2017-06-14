@@ -69,7 +69,7 @@ fieldset > .field {
 	}
 }
 
-fieldset.no-border {
+fieldset.no-spacing {
 	border: none;
 	padding-left: 0;
 	margin: 0;
@@ -87,9 +87,6 @@ fieldset legend {
 	padding: 2rem;
 	box-sizing: border-box;
 }
-.column {
-	box-sizing: border-box;
-}
 .page-header {
 	padding: .25rem 1.25rem;
 	margin-bottom: 1rem;
@@ -98,16 +95,24 @@ fieldset legend {
 	border-bottom: 3px solid #277552;
 	position: relative;
 }
+.panel {
+	background-color: #277552;
+	color: #e6e6e6;
+	padding: 0.5rem;
+}
+.panel:not(last-child) {
+	margin-bottom: 1rem;
+}
 .left {
 	margin-bottom: 1rem;
-	padding: 0.5rem;
-	background-color: #277552;
-	color: #e6e6e6;
+	/*padding: 0.5rem;*/
+	/*background-color: #277552;
+	color: #e6e6e6;*/
 }
 .right {
-	padding: 0.5rem;
-	background-color: #277552;
-	color: #e6e6e6;
+	/*padding: 0.5rem;*/
+	/*background-color: #277552;
+	color: #e6e6e6;*/
 }
 .head-bar {
 	color: #e6e6e6;
@@ -208,4 +213,7 @@ fieldset legend {
 }
 .clear {
 	clear: both;
+}
+.indent {
+	margin-left: 1.25rem;
 }

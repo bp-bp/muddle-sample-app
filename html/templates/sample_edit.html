@@ -1,4 +1,4 @@
-<div class = "right column">
+<div class = "right panel">
 	<!-- delete button, implement later -->
 	<!--<button ng-if = "s_edit.current.entity().type === s_edit.current.type()" -->
 	
@@ -11,9 +11,9 @@
 		<h5>{{s_edit.current.type()}}</h5>
 		<button 	ng-if = "s_edit.current.type()" 
 					ng-click = "s_edit.current.entity(s_edit.dm.new_blank_entity(s_edit.current.type()))">New {{s_edit.current.type()}}</button>
-		<button 	ng-if = "s_edit.current.entity().type === s_edit.current.type()" 
+		<button 	ng-if = "s_edit.current.entity() && s_edit.current.entity().type === s_edit.current.type()" 
 					ng-click = "s_edit.delete_entity(s_edit.current.entity())">Delete {{s_edit.current.type()}}</button>
-		<button 	ng-if = "s_edit.current.type() && s_edit.dm.modified_ents().length" 
+		<button 	ng-if = "s_edit.current.entity() && s_edit.current.type() && s_edit.dm.modified_ents().length" 
 					ng-click = "s_edit.backend.save(s_edit.dm.modified_ents(), s_edit.current.master())">Save</button>
 		
 	
@@ -37,6 +37,10 @@
 					<span>Dept:</span> <select 	mud-bind
 									ng-options = "dept.id as dept.get_child('name').val() for dept in s_edit.dm.ents_by_type['department'] track by dept.id"></select>
 				</mud-prop>
+				
+				<!-- references property of another entity linked to this one, in this case Department -->
+				<p class = "indent">Work location: {{ent.get_child('dept').val().get_child('location').val()}}</p>
+				
 			</fieldset>
 			
 			<!-- a list-prop with variable length -->
@@ -80,7 +84,7 @@
 				</section>
 			</fieldset>
 			<!--</mud-prop-cont>-->
-			<!-- filepicker -->
+			<!-- filepicker - note that display and download of uploaded image files not yet implemented -->
 			<mud-prop-cont mud-name = "a_file">
 				<label class = "button"><input style = "visibility: hidden; overflow: hidden; position: absolute;" type = "file" asset-filepicker/>{{mud.filename_prop.val() ? "File: " + mud.filename_prop.val() : "Click to attach photo..."}}</label>
 			</mud-prop-cont>
@@ -111,8 +115,11 @@
 	<!-- Department -->
 	<div ng-show = "s_edit.current.type() === 'department'">
 		<form mud-ent = "ent" mud-ent-type = "department" ng-repeat = "ent in s_edit.dm.ents_by_type['department'] | filter:{id: s_edit.current.entity().id}">
-			<mud-prop mud-name = "name" mud-prop-type = "val">
+			<mud-prop class = "field" mud-name = "name" mud-prop-type = "val">
 				Name: <input mud-bind/>
+			</mud-prop>
+			<mud-prop class = "field" mud-name = "location" mud-prop-type = "val">
+				Located: <input mud-bind/>
 			</mud-prop>
 		</form>
 	</div>

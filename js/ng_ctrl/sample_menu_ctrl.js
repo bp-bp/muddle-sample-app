@@ -44,6 +44,7 @@ function sample_menu_ctrl(data_muddle, muddle_backend, current) {
 		if (go) {
 			var master = self.dm.new_blank_master();
 			self.dm.init_keep_masters();
+			self.current.init();
 			self.current.master(master);
 			return master;
 		}
